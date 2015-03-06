@@ -44,8 +44,9 @@ class ViewController: UIViewController , UITableViewDelegate ,UITableViewDataSou
                 var accounts:NSArray? = NSArray()
                 accounts! = account!.accountsWithAccountType(accountType)
                 if accounts!.count > 0 {
+                    //アカウントが複数ある場合１つ選ぶ
                     var twitterAccount:ACAccount = accounts!.lastObject as ACAccount
-                    var reqestAPI:NSURL = NSURL(string:"https://api.twitter.com/1.1/statuses/home_timeline.json")
+                    var reqestAPI:NSURL = NSURL(string:"https://api.twitter.com/1.1/statuses/home_timeline.json")!
                     
                     var params:NSMutableDictionary? = NSMutableDictionary()
                     params!.setObject("100", forKey: "count")
@@ -117,9 +118,10 @@ class ViewController: UIViewController , UITableViewDelegate ,UITableViewDataSou
         var userID = userInfo["screen_name"] as NSString
         userIDLabel.text = "@\(userID)"
         var userImgPath:NSString = userInfo["profile_image_url"] as NSString
-        var userImgUrl:NSURL = NSURL(string: userImgPath)
-        var userImgPathData:NSData = NSData(contentsOfURL: userImgUrl)
+        var userImgUrl:NSURL = NSURL(string: userImgPath)!
+        var userImgPathData:NSData = NSData(contentsOfURL: userImgUrl)!
         userImgView.image = UIImage(data: userImgPathData)
+        
         return cell
     }
     
